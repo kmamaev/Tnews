@@ -1,7 +1,13 @@
-protocol NewsItemVM {
-    var title: String { get }
-    var content: String { get }
+import Foundation
+
+struct NewsItemVM {
+    let title: String
+    let text: String
 }
 
-extension NewsItem: NewsItemVM {
+extension NewsItemVM {
+    init(newsItem: NewsItem, dateFormatter: DateFormatter) {
+        title = dateFormatter.string(from: newsItem.publicationDate)
+        text = newsItem.text
+    }
 }

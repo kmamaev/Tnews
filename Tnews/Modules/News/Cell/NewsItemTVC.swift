@@ -10,6 +10,6 @@ class NewsItemTVC: UITableViewCell {
     
     func configure(withViewModel viewModel: NewsItemVM) {
         titleLabel.text = viewModel.title
-        contentLabel.text = viewModel.content
+        contentLabel.text = viewModel.text
     }
 }

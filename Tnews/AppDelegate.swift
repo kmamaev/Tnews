@@ -9,15 +9,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     
-        window = UIWindow(frame: UIScreen.main.bounds)
-        
+        let context = AppDelegate.configuredContext()
+
         let newsStoryboard = UIStoryboard(name: "News", bundle: nil)
-        let newsListVC = newsStoryboard.instantiateInitialViewController()
-        
+        let newsListVC = newsStoryboard.instantiateInitialViewController() as! NewsListVC
+        newsListVC.context = context
+
+        window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = newsListVC
         window?.makeKeyAndVisible()
     
         return true
+    }
+
+    static func configuredContext() -> Context {
+        let apiService = APIService()
+        let newsService = NewsService(apiService: apiService)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM hh:mm"
+        let context = Context(apiService: apiService, newsService: newsService, dateFormatter: dateFormatter)
+
+        return context
     }
 
     // MARK: - Core Data stack

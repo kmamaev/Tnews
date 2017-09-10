@@ -6,8 +6,9 @@ private enum Constants {
 
 class NewsListVC: UIViewController {
     @IBOutlet fileprivate var tableView: UITableView!
-    
-    let viewModel = NewsListVM()
+
+    var context: Context!
+    var viewModel: NewsListVM!
 }
 
 extension NewsListVC {
@@ -15,6 +16,7 @@ extension NewsListVC {
         super.viewDidLoad()
         
         configureTableView()
+        configureViewModel()
     }
     
     func configureTableView() {
@@ -22,6 +24,17 @@ extension NewsListVC {
         tableView.register(cellNib, forCellReuseIdentifier: Constants.newsItemReuseId)
         
         tableView.estimatedRowHeight = 60
+    }
+    
+    func configureViewModel() {
+        viewModel = NewsListVM(newsService: context.newsService, dateFormatter: context.dateFormatter)
+        viewModel.delegate = self
+    }
+}
+
+extension NewsListVC: NewsListVMDelegate {
+    func newsListVMDidUpdateNews(_ newsListVM: NewsListVM) {
+        tableView.reloadData()
     }
 }
 
