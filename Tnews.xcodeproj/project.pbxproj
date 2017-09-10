@@ -7,23 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B52712381F65802C001E7533 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52712371F65802C001E7533 /* AppDelegate.swift */; };
-		B527123A1F65802C001E7533 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52712391F65802C001E7533 /* ViewController.swift */; };
-		B527123D1F65802C001E7533 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B527123B1F65802C001E7533 /* Main.storyboard */; };
-		B52712401F65802C001E7533 /* Tnews.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B527123E1F65802C001E7533 /* Tnews.xcdatamodeld */; };
-		B52712421F65802C001E7533 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B52712411F65802C001E7533 /* Assets.xcassets */; };
-		B52712451F65802C001E7533 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B52712431F65802C001E7533 /* LaunchScreen.storyboard */; };
+		B52712581F658289001E7533 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B527124C1F658289001E7533 /* AppDelegate.swift */; };
+		B52712591F658289001E7533 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B527124D1F658289001E7533 /* Assets.xcassets */; };
+		B527125D1F658289001E7533 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B52712541F658289001E7533 /* LaunchScreen.storyboard */; };
+		B527125E1F658289001E7533 /* Tnews.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B52712561F658289001E7533 /* Tnews.xcdatamodeld */; };
+		B52712621F658333001E7533 /* News.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B52712601F658333001E7533 /* News.storyboard */; };
+		B52712631F658333001E7533 /* NewsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52712611F658333001E7533 /* NewsListVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B52712341F65802C001E7533 /* Tnews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tnews.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B52712371F65802C001E7533 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B52712391F65802C001E7533 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B527123C1F65802C001E7533 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B527123F1F65802C001E7533 /* Tnews.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tnews.xcdatamodel; sourceTree = "<group>"; };
-		B52712411F65802C001E7533 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B52712441F65802C001E7533 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		B52712461F65802C001E7533 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B527124C1F658289001E7533 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B527124D1F658289001E7533 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B52712531F658289001E7533 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B52712541F658289001E7533 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B52712571F658289001E7533 /* Tnews.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tnews.xcdatamodel; sourceTree = "<group>"; };
+		B52712601F658333001E7533 /* News.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = News.storyboard; sourceTree = "<group>"; };
+		B52712611F658333001E7533 /* NewsListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +56,55 @@
 		B52712361F65802C001E7533 /* Tnews */ = {
 			isa = PBXGroup;
 			children = (
-				B52712371F65802C001E7533 /* AppDelegate.swift */,
-				B52712391F65802C001E7533 /* ViewController.swift */,
-				B527123B1F65802C001E7533 /* Main.storyboard */,
-				B52712411F65802C001E7533 /* Assets.xcassets */,
-				B52712431F65802C001E7533 /* LaunchScreen.storyboard */,
-				B52712461F65802C001E7533 /* Info.plist */,
-				B527123E1F65802C001E7533 /* Tnews.xcdatamodeld */,
+				B527124C1F658289001E7533 /* AppDelegate.swift */,
+				B527124D1F658289001E7533 /* Assets.xcassets */,
+				B527124E1F658289001E7533 /* Models */,
+				B527124F1F658289001E7533 /* Modules */,
+				B52712521F658289001E7533 /* Resources */,
+				B52712551F658289001E7533 /* Services */,
+				B52712561F658289001E7533 /* Tnews.xcdatamodeld */,
 			);
 			path = Tnews;
+			sourceTree = "<group>";
+		};
+		B527124E1F658289001E7533 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B527124F1F658289001E7533 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				B527125F1F658333001E7533 /* News */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		B52712521F658289001E7533 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B52712531F658289001E7533 /* Info.plist */,
+				B52712541F658289001E7533 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B52712551F658289001E7533 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		B527125F1F658333001E7533 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				B52712601F658333001E7533 /* News.storyboard */,
+				B52712611F658333001E7533 /* NewsListVC.swift */,
+			);
+			path = News;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -99,6 +139,8 @@
 				TargetAttributes = {
 					B52712331F65802C001E7533 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = WL2U6TR99S;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -126,9 +168,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B52712451F65802C001E7533 /* LaunchScreen.storyboard in Resources */,
-				B52712421F65802C001E7533 /* Assets.xcassets in Resources */,
-				B527123D1F65802C001E7533 /* Main.storyboard in Resources */,
+				B52712591F658289001E7533 /* Assets.xcassets in Resources */,
+				B527125D1F658289001E7533 /* LaunchScreen.storyboard in Resources */,
+				B52712621F658333001E7533 /* News.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,32 +181,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B527123A1F65802C001E7533 /* ViewController.swift in Sources */,
-				B52712381F65802C001E7533 /* AppDelegate.swift in Sources */,
-				B52712401F65802C001E7533 /* Tnews.xcdatamodeld in Sources */,
+				B52712581F658289001E7533 /* AppDelegate.swift in Sources */,
+				B527125E1F658289001E7533 /* Tnews.xcdatamodeld in Sources */,
+				B52712631F658333001E7533 /* NewsListVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		B527123B1F65802C001E7533 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B527123C1F65802C001E7533 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		B52712431F65802C001E7533 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B52712441F65802C001E7533 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		B52712471F65802C001E7533 /* Debug */ = {
@@ -262,10 +285,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Tnews/Info.plist;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = WL2U6TR99S;
+				INFOPLIST_FILE = Tnews/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = konstantin.mamaev.Tnews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -274,7 +301,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Tnews/Info.plist;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = WL2U6TR99S;
+				INFOPLIST_FILE = Tnews/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = konstantin.mamaev.Tnews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -305,12 +335,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		B527123E1F65802C001E7533 /* Tnews.xcdatamodeld */ = {
+		B52712561F658289001E7533 /* Tnews.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				B527123F1F65802C001E7533 /* Tnews.xcdatamodel */,
+				B52712571F658289001E7533 /* Tnews.xcdatamodel */,
 			);
-			currentVersion = B527123F1F65802C001E7533 /* Tnews.xcdatamodel */;
+			currentVersion = B52712571F658289001E7533 /* Tnews.xcdatamodel */;
 			path = Tnews.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
