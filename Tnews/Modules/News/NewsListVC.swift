@@ -8,33 +8,53 @@ class NewsListVC: UIViewController {
     @IBOutlet fileprivate var tableView: UITableView!
 
     var context: Context!
-    var viewModel: NewsListVM!
+    var viewModel: NewsListVMType!
+
+    fileprivate let refreshControl = UIRefreshControl()
 }
 
 extension NewsListVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureRefreshControl()
         configureTableView()
         configureViewModel()
     }
-    
+}
+
+private extension NewsListVC {
+    func configureRefreshControl() {
+        refreshControl.addTarget(self, action: #selector(refreshAction(_:)), for: .valueChanged)
+    }
+
     func configureTableView() {
         let cellNib = UINib(nibName: "NewsItemTVC", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: Constants.newsItemReuseId)
         
         tableView.estimatedRowHeight = 60
+
+        tableView.refreshControl = refreshControl
     }
     
     func configureViewModel() {
         viewModel = NewsListVM(newsService: context.newsService, dateFormatter: context.dateFormatter)
         viewModel.delegate = self
     }
+
+    @objc func refreshAction(_ sender: Any) {
+        viewModel.refreshNews()
+    }
 }
 
 extension NewsListVC: NewsListVMDelegate {
     func newsListVMDidUpdateNews(_ newsListVM: NewsListVM) {
         tableView.reloadData()
+        refreshControl.endRefreshing()
+    }
+
+    func newsListVMDidFailUpdatingNews(_ newsListVM: NewsListVM) {
+        refreshControl.endRefreshing()
     }
 }
 
