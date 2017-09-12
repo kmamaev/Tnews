@@ -15,8 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let newsListVC = newsStoryboard.instantiateInitialViewController() as! NewsListVC
         newsListVC.context = context
 
+        let navigationController = UINavigationController(rootViewController: newsListVC)
+
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = newsListVC
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     
         return true

@@ -5,17 +5,31 @@ protocol NewsListVMDelegate: class {
     func newsListVMDidFailUpdatingNews(_ newsListVM: NewsListVM)
 }
 
+protocol NewsListVMRoutingDelegate: class {
+    func newsListVM(_ newsListVM: NewsListVM, didStartAction action: NewsListVM.Action)
+}
+
 protocol NewsListVMType {
     weak var delegate: NewsListVMDelegate? { get set }
-    var news: [NewsItemVM] { get }
+    weak var routingDelegate: NewsListVMRoutingDelegate? { get set }
+    var news: [NewsItemVMType] { get }
 
     func refreshNews()
+    func selectNewsItem(at index: Int)
 }
 
 class NewsListVM: NewsListVMType {
-    weak var delegate: NewsListVMDelegate?
+    enum Action {
+        case selectNewsItem(NewsItem)
+    }
 
-    fileprivate(set) var news: [NewsItemVM] = []
+    weak var delegate: NewsListVMDelegate?
+    weak var routingDelegate: NewsListVMRoutingDelegate?
+
+    var news: [NewsItemVMType] {
+        return newsItemVMs.map({ $0 })
+    }
+    fileprivate var newsItemVMs: [NewsItemVM] = []
 
     fileprivate let newsService: NewsService
     fileprivate let dateFormatter: DateFormatter
@@ -29,6 +43,11 @@ class NewsListVM: NewsListVMType {
 
     func refreshNews() {
         loadNews()
+    }
+
+    func selectNewsItem(at index: Int) {
+        let newsItemVM = newsItemVMs[index]
+        routingDelegate?.newsListVM(self, didStartAction: .selectNewsItem(newsItemVM.newsItem))
     }
 }
 
@@ -46,7 +65,7 @@ private extension NewsListVM {
     }
 
     func handleGotNews(_ newsItems: [NewsItem]) {
-        news = newsItems
+        newsItemVMs = newsItems
             .sorted(by: { $0.publicationDate > $1.publicationDate })
             .map({ NewsItemVM(newsItem: $0, dateFormatter: dateFormatter) })
 

@@ -16,10 +16,22 @@ class NewsListVC: UIViewController {
 extension NewsListVC {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         configureRefreshControl()
         configureTableView()
         configureViewModel()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 }
 
@@ -40,6 +52,7 @@ private extension NewsListVC {
     func configureViewModel() {
         viewModel = NewsListVM(newsService: context.newsService, dateFormatter: context.dateFormatter)
         viewModel.delegate = self
+        viewModel.routingDelegate = self
     }
 
     @objc func refreshAction(_ sender: Any) {
@@ -59,7 +72,10 @@ extension NewsListVC: NewsListVMDelegate {
 }
 
 extension NewsListVC: UITableViewDelegate {
-    // TODO: implement this
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        viewModel.selectNewsItem(at: indexPath.row)
+    }
 }
 
 extension NewsListVC: UITableViewDataSource {

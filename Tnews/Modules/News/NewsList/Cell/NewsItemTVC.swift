@@ -8,7 +8,7 @@ class NewsItemTVC: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func configure(withViewModel viewModel: NewsItemVM) {
+    func configure(withViewModel viewModel: NewsItemVMType) {
         titleLabel.text = viewModel.title
         contentLabel.text = viewModel.text
     }
