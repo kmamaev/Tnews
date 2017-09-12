@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let apiService = APIService()
         let newsService = NewsService(apiService: apiService)
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM hh:mm"
+        dateFormatter.dateFormat = "dd.MM.yyyy hh:mm"
         let context = Context(apiService: apiService, newsService: newsService, dateFormatter: dateFormatter)
 
         return context

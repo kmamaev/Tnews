@@ -31,7 +31,10 @@ extension NewsListVM {
 
 private extension NewsListVM {
     func handleGotNews(_ newsItems: [NewsItem]) {
-        news = newsItems.map({ NewsItemVM(newsItem: $0, dateFormatter: dateFormatter) })
+        news = newsItems
+            .sorted(by: { $0.publicationDate > $1.publicationDate })
+            .map({ NewsItemVM(newsItem: $0, dateFormatter: dateFormatter) })
+
         delegate?.newsListVMDidUpdateNews(self)
     }
 }
