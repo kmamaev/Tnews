@@ -42,6 +42,8 @@ private extension NewsItemDetailsVC {
         titleLabel.text = viewModel.title.htmlConvertedString()
         dateLabel.text = viewModel.formattedDateString
         updateContent()
+
+        viewModel.loadDetails()
     }
 
     func updateContent() {
@@ -52,6 +54,10 @@ private extension NewsItemDetailsVC {
 extension NewsItemDetailsVC: NewsItemDetailsVMDelegate {
     func newsItemsDetailsVMDidUpdateContent(_ newsItemDetailsVM: NewsItemDetailsVM) {
         updateContent()
+    }
+
+    func newsItemsDetailsVMDidFailUpdatingContent(_ newsItemDetailsVM: NewsItemDetailsVM) {
+        presentErrorAlert(NSLocalizedString("NewsItemDetails.Error.UnableToLoadDatails", comment: ""))
     }
 }
 

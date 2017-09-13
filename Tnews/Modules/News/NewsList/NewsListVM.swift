@@ -14,6 +14,7 @@ protocol NewsListVMType {
     weak var routingDelegate: NewsListVMRoutingDelegate? { get set }
     var news: [NewsItemVMType] { get }
 
+    func loadNews()
     func refreshNews()
     func selectNewsItem(at index: Int)
 }
@@ -37,8 +38,18 @@ class NewsListVM: NewsListVMType {
     init(newsService: NewsService, dateFormatter: DateFormatter) {
         self.newsService = newsService
         self.dateFormatter = dateFormatter
+    }
 
-        loadNews()
+    func loadNews() {
+        newsService.getNews { [weak self] result in
+                switch result {
+                    case .success(let newsItems):
+                        self?.handleGotNews(newsItems)
+                    case .failure(let error):
+                        self?.handleFailUpdatingNews()
+                        print(error)
+                }
+            }
     }
 
     func refreshNews() {
@@ -52,23 +63,15 @@ class NewsListVM: NewsListVMType {
 }
 
 private extension NewsListVM {
-    func loadNews() {
-        newsService.getNews { [weak self] result in
-                switch result {
-                    case .success(let newsItems):
-                        self?.handleGotNews(newsItems)
-                    case .failure(let error):
-                        // TODO: add error handling
-                        print(error)
-                }
-            }
-    }
-
     func handleGotNews(_ newsItems: [NewsItem]) {
         newsItemVMs = newsItems
             .sorted(by: { $0.publicationDate > $1.publicationDate })
             .map({ NewsItemVM(newsItem: $0, dateFormatter: dateFormatter) })
 
         delegate?.newsListVMDidUpdateNews(self)
+    }
+
+    func handleFailUpdatingNews() {
+        delegate?.newsListVMDidFailUpdatingNews(self)
     }
 }

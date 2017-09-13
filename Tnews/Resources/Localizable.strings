@@ -1,0 +1,6 @@
+"OK" = "OK";
+"Error" = "Error";
+
+"NewsList.Error.UnableToLoadNews" = "Unable to load news.";
+
+"NewsItemDetails.Error.UnableToLoadDatails" = "Unable to load details of the news item.";

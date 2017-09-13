@@ -53,6 +53,8 @@ private extension NewsListVC {
         viewModel = NewsListVM(newsService: context.newsService, dateFormatter: context.dateFormatter)
         viewModel.delegate = self
         viewModel.routingDelegate = self
+
+        viewModel.loadNews()
     }
 
     @objc func refreshAction(_ sender: Any) {
@@ -68,6 +70,7 @@ extension NewsListVC: NewsListVMDelegate {
 
     func newsListVMDidFailUpdatingNews(_ newsListVM: NewsListVM) {
         refreshControl.endRefreshing()
+        presentErrorAlert(NSLocalizedString("NewsList.Error.UnableToLoadNews", comment: ""))
     }
 }
 

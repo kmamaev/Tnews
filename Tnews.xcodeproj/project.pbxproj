@@ -30,6 +30,8 @@
 		C05125481F68E9E100B412F6 /* NewsItemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05125471F68E9E100B412F6 /* NewsItemDetails.swift */; };
 		C051254A1F68ED2B00B412F6 /* NewsItemDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05125491F68ED2B00B412F6 /* NewsItemDetailsResponse.swift */; };
 		C0866AB11F6956E000188F18 /* String+html.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0866AB01F6956E000188F18 /* String+html.swift */; };
+		C0866AB31F69797B00188F18 /* UIViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0866AB21F69797B00188F18 /* UIViewController+Alerts.swift */; };
+		C0866AB51F697A5800188F18 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C0866AB41F697A5800188F18 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		C05125471F68E9E100B412F6 /* NewsItemDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsItemDetails.swift; sourceTree = "<group>"; };
 		C05125491F68ED2B00B412F6 /* NewsItemDetailsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsItemDetailsResponse.swift; sourceTree = "<group>"; };
 		C0866AB01F6956E000188F18 /* String+html.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+html.swift"; sourceTree = "<group>"; };
+		C0866AB21F69797B00188F18 /* UIViewController+Alerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alerts.swift"; sourceTree = "<group>"; };
+		C0866AB41F697A5800188F18 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +128,7 @@
 			children = (
 				B52712531F658289001E7533 /* Info.plist */,
 				B52712541F658289001E7533 /* LaunchScreen.storyboard */,
+				C0866AB41F697A5800188F18 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -219,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				C0866AB01F6956E000188F18 /* String+html.swift */,
+				C0866AB21F69797B00188F18 /* UIViewController+Alerts.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -285,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B52712591F658289001E7533 /* Assets.xcassets in Resources */,
+				C0866AB51F697A5800188F18 /* Localizable.strings in Resources */,
 				C051253C1F681C6A00B412F6 /* NewsItemTVC.xib in Resources */,
 				B527125D1F658289001E7533 /* LaunchScreen.storyboard in Resources */,
 				B52712621F658333001E7533 /* News.storyboard in Resources */,
@@ -301,6 +308,7 @@
 				C05125461F6825EE00B412F6 /* NewsListVC+Router.swift in Sources */,
 				C051252E1F66C57300B412F6 /* APIRequestManager.swift in Sources */,
 				B52712581F658289001E7533 /* AppDelegate.swift in Sources */,
+				C0866AB31F69797B00188F18 /* UIViewController+Alerts.swift in Sources */,
 				C051252D1F66C57300B412F6 /* APIRequestContext.swift in Sources */,
 				C05125481F68E9E100B412F6 /* NewsItemDetails.swift in Sources */,
 				C051253F1F681C6A00B412F6 /* NewsListVM.swift in Sources */,
