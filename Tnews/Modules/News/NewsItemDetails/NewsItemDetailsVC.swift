@@ -14,19 +14,25 @@ extension NewsItemDetailsVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureViewModel()
-        configureUI()
+        setupViewModel()
     }
 }
 
 private extension NewsItemDetailsVC {
-    func configureViewModel() {
-        viewModel = NewsItemDetailsVM(newsService: context.newsService, dateFormatter: context.dateFormatter)
-    }
+    func setupViewModel() {
+        viewModel = NewsItemDetailsVM(newsItem: newsItem, newsService: context.newsService,
+            dateFormatter: context.dateFormatter)
 
-    func configureUI() {
-        titleLabel.text = newsItem.text
-        dateLabel.text = context.dateFormatter.string(from: newsItem.publicationDate)
-        contentTextView.text = nil
+        viewModel.delegate = self
+
+        titleLabel.text = viewModel.title
+        dateLabel.text = viewModel.formattedDateString
+        contentTextView.text = viewModel.content
+    }
+}
+
+extension NewsItemDetailsVC: NewsItemDetailsVMDelegate {
+    func newsItemsDetailsVMDidUpdateContent(_ newsItemDetailsVM: NewsItemDetailsVM) {
+        contentTextView.text = viewModel.content
     }
 }

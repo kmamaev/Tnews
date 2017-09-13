@@ -19,7 +19,16 @@ class NewsService {
                     completion(.success(newsListResponse.newsItems))
                 case .failure(let error):
                     completion(.failure(error))
+    }
+
+    func getDetailsOfNewsItem(_ newsItem: NewsItem, completion: @escaping (Result<NewsItemDetails>) -> ()) {
+        apiService.getDetailsOfNewsItem(withId: newsItem.id) { result in
+                switch result {
+                    case .success(let newsItemDetailsResponse):
+                        completion(.success(newsItemDetailsResponse.newsItemDetails))
+                    case .failure(let error):
+                        completion(.failure(error))
+                }
             }
-        }
     }
 }

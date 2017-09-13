@@ -25,4 +25,16 @@ extension APIService {
 
         requestManager.performRequest(withContext: requestContext, completion: completion)
     }
+
+    func getDetailsOfNewsItem(withId id: String, completion: @escaping (APIRequestResult<NewsItemDetailsResponse>) -> ()) {
+        let apiMethod = "news_content"
+
+        let queryParameters: [URLQueryItem] = [URLQueryItem(name: "id", value: id)]
+
+        var requestContext = APIRequestContext()
+        requestContext.apiMethod = apiMethod
+        requestContext.queryItems = queryParameters
+
+        requestManager.performRequest(withContext: requestContext, completion: completion)
+    }
 }
