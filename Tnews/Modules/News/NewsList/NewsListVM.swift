@@ -54,14 +54,14 @@ class NewsListVM: NewsListVMType {
 private extension NewsListVM {
     func loadNews() {
         newsService.getNews { [weak self] result in
-            switch result {
-            case .success(let newsItems):
-                self?.handleGotNews(newsItems)
-            case .failure(let error):
-                // TODO: add error handling
-                print(error)
+                switch result {
+                    case .success(let newsItems):
+                        self?.handleGotNews(newsItems)
+                    case .failure(let error):
+                        // TODO: add error handling
+                        print(error)
+                }
             }
-        }
     }
 
     func handleGotNews(_ newsItems: [NewsItem]) {

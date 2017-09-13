@@ -14,11 +14,13 @@ class NewsService {
     
     func getNews(completion: @escaping (Result<[NewsItem]>) -> ()) {
         apiService.fetchNews { result in
-            switch result {
-                case .success(let newsListResponse):
-                    completion(.success(newsListResponse.newsItems))
-                case .failure(let error):
-                    completion(.failure(error))
+                switch result {
+                    case .success(let newsListResponse):
+                        completion(.success(newsListResponse.newsItems))
+                    case .failure(let error):
+                        completion(.failure(error))
+                }
+            }
     }
 
     func getDetailsOfNewsItem(_ newsItem: NewsItem, completion: @escaping (Result<NewsItemDetails>) -> ()) {
