@@ -29,6 +29,7 @@
 		C05125461F6825EE00B412F6 /* NewsListVC+Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05125451F6825EE00B412F6 /* NewsListVC+Router.swift */; };
 		C05125481F68E9E100B412F6 /* NewsItemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05125471F68E9E100B412F6 /* NewsItemDetails.swift */; };
 		C051254A1F68ED2B00B412F6 /* NewsItemDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05125491F68ED2B00B412F6 /* NewsItemDetailsResponse.swift */; };
+		C0866AB11F6956E000188F18 /* String+html.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0866AB01F6956E000188F18 /* String+html.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		C05125451F6825EE00B412F6 /* NewsListVC+Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NewsListVC+Router.swift"; sourceTree = "<group>"; };
 		C05125471F68E9E100B412F6 /* NewsItemDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsItemDetails.swift; sourceTree = "<group>"; };
 		C05125491F68ED2B00B412F6 /* NewsItemDetailsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsItemDetailsResponse.swift; sourceTree = "<group>"; };
+		C0866AB01F6956E000188F18 /* String+html.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+html.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				B527124F1F658289001E7533 /* Modules */,
 				B52712521F658289001E7533 /* Resources */,
 				B52712551F658289001E7533 /* Services */,
+				C0866AAF1F69568900188F18 /* Utils */,
 				B52712561F658289001E7533 /* Tnews.xcdatamodeld */,
 			);
 			path = Tnews;
@@ -212,6 +215,14 @@
 			path = NewsItemDetails;
 			sourceTree = "<group>";
 		};
+		C0866AAF1F69568900188F18 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C0866AB01F6956E000188F18 /* String+html.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -300,6 +311,7 @@
 				C051253E1F681C6A00B412F6 /* NewsListVC.swift in Sources */,
 				B52712791F659179001E7533 /* NewsService.swift in Sources */,
 				B527125E1F658289001E7533 /* Tnews.xcdatamodeld in Sources */,
+				C0866AB11F6956E000188F18 /* String+html.swift in Sources */,
 				C051254A1F68ED2B00B412F6 /* NewsItemDetailsResponse.swift in Sources */,
 				C051253D1F681C6A00B412F6 /* NewsItemVM.swift in Sources */,
 				C05125331F66D24000B412F6 /* NewsListResponse.swift in Sources */,

@@ -3,7 +3,8 @@ import UIKit
 class NewsItemDetailsVC: UIViewController {
     @IBOutlet fileprivate var titleLabel: UILabel!
     @IBOutlet fileprivate var dateLabel: UILabel!
-    @IBOutlet fileprivate var contentTextView: UITextView!
+    @IBOutlet fileprivate var webView: UIWebView!
+    @IBOutlet fileprivate var webViewHeight: NSLayoutConstraint!
 
     var context: Context!
     var newsItem: NewsItem!
@@ -14,15 +15,22 @@ extension NewsItemDetailsVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureContentTextView()
+        configureWebView()
         setupViewModel()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        webView.delegate = nil
     }
 }
 
 private extension NewsItemDetailsVC {
-    func configureContentTextView() {
-        contentTextView.textContainer.lineFragmentPadding = 0
-        contentTextView.textContainerInset = .zero
+    func configureWebView() {
+        webView.scrollView.contentInset = .zero
+        webView.scrollView.isScrollEnabled = false
+        webView.delegate = self
     }
 
     func setupViewModel() {
@@ -31,14 +39,24 @@ private extension NewsItemDetailsVC {
 
         viewModel.delegate = self
 
-        titleLabel.text = viewModel.title
+        titleLabel.text = viewModel.title.htmlConvertedString()
         dateLabel.text = viewModel.formattedDateString
-        contentTextView.text = viewModel.content
+        updateContent()
+    }
+
+    func updateContent() {
+        webView.loadHTMLString(viewModel.content, baseURL: nil)
     }
 }
 
 extension NewsItemDetailsVC: NewsItemDetailsVMDelegate {
     func newsItemsDetailsVMDidUpdateContent(_ newsItemDetailsVM: NewsItemDetailsVM) {
-        contentTextView.text = viewModel.content
+        updateContent()
+    }
+}
+
+extension NewsItemDetailsVC: UIWebViewDelegate {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        webViewHeight.constant = webView.scrollView.contentSize.height
     }
 }
