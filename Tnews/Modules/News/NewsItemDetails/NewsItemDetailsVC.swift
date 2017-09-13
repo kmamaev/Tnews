@@ -14,11 +14,17 @@ extension NewsItemDetailsVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureContentTextView()
         setupViewModel()
     }
 }
 
 private extension NewsItemDetailsVC {
+    func configureContentTextView() {
+        contentTextView.textContainer.lineFragmentPadding = 0
+        contentTextView.textContainerInset = .zero
+    }
+
     func setupViewModel() {
         viewModel = NewsItemDetailsVM(newsItem: newsItem, newsService: context.newsService,
             dateFormatter: context.dateFormatter)
