@@ -38,22 +38,22 @@ class NewsListVM: NewsListVMType {
     init(newsService: NewsService, dateFormatter: DateFormatter) {
         self.newsService = newsService
         self.dateFormatter = dateFormatter
-    }
 
+        newsService.addObserver(self)
+    }
+    
+    deinit {
+        newsService.removeObserver(self)
+    }
+}
+
+extension NewsListVM {
     func loadNews() {
-        newsService.getNews { [weak self] result in
-                switch result {
-                    case .success(let newsItems):
-                        self?.handleGotNews(newsItems)
-                    case .failure(let error):
-                        self?.handleFailUpdatingNews()
-                        print(error)
-                }
-            }
+        newsService.fetchAndSaveNews(fetchFromCache: true)
     }
 
     func refreshNews() {
-        loadNews()
+        newsService.fetchAndSaveNews(fetchFromCache: false)
     }
 
     func selectNewsItem(at index: Int) {
@@ -62,16 +62,17 @@ class NewsListVM: NewsListVMType {
     }
 }
 
-private extension NewsListVM {
-    func handleGotNews(_ newsItems: [NewsItem]) {
-        newsItemVMs = newsItems
+extension NewsListVM: NewsServiceObserver {
+    func newsServiceDidUpdateNews(_ newsService: NewsService) {
+        newsItemVMs = newsService.newsItems
             .sorted(by: { $0.publicationDate > $1.publicationDate })
             .map({ NewsItemVM(newsItem: $0, dateFormatter: dateFormatter) })
 
         delegate?.newsListVMDidUpdateNews(self)
     }
 
-    func handleFailUpdatingNews() {
+    func newsService(_ newsService: NewsService, didFailUpdatingNewsWithError error: Error) {
         delegate?.newsListVMDidFailUpdatingNews(self)
+        print(error)
     }
 }

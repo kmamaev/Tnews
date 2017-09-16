@@ -32,6 +32,9 @@
 		C0866AB11F6956E000188F18 /* String+html.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0866AB01F6956E000188F18 /* String+html.swift */; };
 		C0866AB31F69797B00188F18 /* UIViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0866AB21F69797B00188F18 /* UIViewController+Alerts.swift */; };
 		C0866AB51F697A5800188F18 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C0866AB41F697A5800188F18 /* Localizable.strings */; };
+		C0866AB81F697EF100188F18 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0866AB71F697EF100188F18 /* StorageService.swift */; };
+		C0A14DBE1F6D413E000808F7 /* CDNewsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A14DBD1F6D413E000808F7 /* CDNewsItem.swift */; };
+		C0A14DC01F6D414E000808F7 /* CDNewsItemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A14DBF1F6D414E000808F7 /* CDNewsItemDetails.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +65,9 @@
 		C0866AB01F6956E000188F18 /* String+html.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+html.swift"; sourceTree = "<group>"; };
 		C0866AB21F69797B00188F18 /* UIViewController+Alerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alerts.swift"; sourceTree = "<group>"; };
 		C0866AB41F697A5800188F18 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		C0866AB71F697EF100188F18 /* StorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		C0A14DBD1F6D413E000808F7 /* CDNewsItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDNewsItem.swift; sourceTree = "<group>"; };
+		C0A14DBF1F6D414E000808F7 /* CDNewsItemDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDNewsItemDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +144,7 @@
 			children = (
 				B527126F1F6590F8001E7533 /* APIService */,
 				B52712751F659152001E7533 /* NewsService */,
+				C0866AB61F697EDE00188F18 /* StorageService */,
 				C05125231F66BE3800B412F6 /* Context.swift */,
 			);
 			path = Services;
@@ -229,6 +236,24 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		C0866AB61F697EDE00188F18 /* StorageService */ = {
+			isa = PBXGroup;
+			children = (
+				C0A14DBC1F6D412D000808F7 /* PersistentModel */,
+				C0866AB71F697EF100188F18 /* StorageService.swift */,
+			);
+			path = StorageService;
+			sourceTree = "<group>";
+		};
+		C0A14DBC1F6D412D000808F7 /* PersistentModel */ = {
+			isa = PBXGroup;
+			children = (
+				C0A14DBD1F6D413E000808F7 /* CDNewsItem.swift */,
+				C0A14DBF1F6D414E000808F7 /* CDNewsItemDetails.swift */,
+			);
+			path = PersistentModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -307,9 +332,11 @@
 			files = (
 				C05125461F6825EE00B412F6 /* NewsListVC+Router.swift in Sources */,
 				C051252E1F66C57300B412F6 /* APIRequestManager.swift in Sources */,
+				C0A14DC01F6D414E000808F7 /* CDNewsItemDetails.swift in Sources */,
 				B52712581F658289001E7533 /* AppDelegate.swift in Sources */,
 				C0866AB31F69797B00188F18 /* UIViewController+Alerts.swift in Sources */,
 				C051252D1F66C57300B412F6 /* APIRequestContext.swift in Sources */,
+				C0A14DBE1F6D413E000808F7 /* CDNewsItem.swift in Sources */,
 				C05125481F68E9E100B412F6 /* NewsItemDetails.swift in Sources */,
 				C051253F1F681C6A00B412F6 /* NewsListVM.swift in Sources */,
 				C05125441F681CC500B412F6 /* NewsItemDetailsVM.swift in Sources */,
@@ -318,6 +345,7 @@
 				C05125241F66BE3800B412F6 /* Context.swift in Sources */,
 				C051253E1F681C6A00B412F6 /* NewsListVC.swift in Sources */,
 				B52712791F659179001E7533 /* NewsService.swift in Sources */,
+				C0866AB81F697EF100188F18 /* StorageService.swift in Sources */,
 				B527125E1F658289001E7533 /* Tnews.xcdatamodeld in Sources */,
 				C0866AB11F6956E000188F18 /* String+html.swift in Sources */,
 				C051254A1F68ED2B00B412F6 /* NewsItemDetailsResponse.swift in Sources */,

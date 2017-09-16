@@ -9,7 +9,7 @@ class NewsItemTVC: UITableViewCell {
     }
     
     func configure(withViewModel viewModel: NewsItemVMType) {
-        titleLabel.text = viewModel.title.htmlConvertedString()
+        titleLabel.text = viewModel.title
         contentLabel.text = viewModel.text.htmlConvertedString()
     }
 }

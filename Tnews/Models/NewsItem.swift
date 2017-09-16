@@ -20,3 +20,11 @@ extension NewsItem: Mappable {
         self.publicationDate = Date(timeIntervalSince1970: TimeInterval(publicationDateMilliseconds / 1000))
     }
 }
+
+extension NewsItem {
+    init(coreDataObject: CDNewsItem) {
+        self.id = coreDataObject.id
+        self.text = coreDataObject.text
+        self.publicationDate = coreDataObject.publicationDate as Date
+    }
+}
