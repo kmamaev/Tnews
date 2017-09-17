@@ -23,6 +23,8 @@ class NewsItemDetailsVM: NewsItemDetailsVMType {
 
     fileprivate let newsService: NewsService
     fileprivate let newsItem: NewsItem
+    
+    fileprivate var loadDetailsTask: CancelableTask? = nil
 
     init(newsItem: NewsItem, newsService: NewsService, dateFormatter: DateFormatter) {
         self.newsService = newsService
@@ -32,14 +34,17 @@ class NewsItemDetailsVM: NewsItemDetailsVMType {
         formattedDateString = dateFormatter.string(from: newsItem.publicationDate)
     }
 
+    deinit {
+        loadDetailsTask?.cancel()
+    }
+
     func loadDetails() {
-        newsService.getDetailsOfNewsItem(newsItem) { [weak self] result in
+        loadDetailsTask = newsService.getDetailsOfNewsItem(newsItem) { [weak self] result in
                 switch result {
                     case .success(let newsItemDetails):
                         self?.handleGotNewsItemDetails(newsItemDetails)
                     case .failure(let error):
-                        self?.handleFailUpdatingContent()
-                        print(error)
+                        self?.handleFailUpdatingContent(withError: error)
                 }
             }
     }
@@ -51,7 +56,8 @@ private extension NewsItemDetailsVM {
         delegate?.newsItemsDetailsVMDidUpdateContent(self)
     }
 
-    func handleFailUpdatingContent() {
+    func handleFailUpdatingContent(withError error: Error) {
         delegate?.newsItemsDetailsVMDidFailUpdatingContent(self)
+        print(error)
     }
 }

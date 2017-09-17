@@ -35,7 +35,7 @@ class APIRequestManager {
 
 extension APIRequestManager {
     func performRequest<ResponseType: Mappable>(withContext requestContext: APIRequestContext,
-        completion: @escaping (APIRequestResult<ResponseType>) -> ())
+        completion: @escaping (APIRequestResult<ResponseType>) -> ()) -> APITask
     {
         let urlRequest = buildURLRequest(withContext: requestContext)
 
@@ -62,10 +62,11 @@ extension APIRequestManager {
         }
 
         dataTask.resume()
+        return APITask(dataTask)
     }
 
     func performRequest<ResponseType: Mappable>(withContext requestContext: APIRequestContext,
-        completion: @escaping (APIRequestResult<[ResponseType]>) -> ())
+        completion: @escaping (APIRequestResult<[ResponseType]>) -> ()) -> APITask
     {
         let urlRequest = buildURLRequest(withContext: requestContext)
 
@@ -105,6 +106,7 @@ extension APIRequestManager {
         }
 
         dataTask.resume()
+        return APITask(dataTask)
     }
 }
 

@@ -17,16 +17,16 @@ class APIService {
 // MARK: - API Requests
 
 extension APIService {
-    func fetchNews(completion: @escaping (APIRequestResult<NewsListResponse>) -> ()) {
+    func fetchNews(completion: @escaping (APIRequestResult<NewsListResponse>) -> ()) -> APITask {
         let apiMethod = "news"
 
         var requestContext = APIRequestContext()
         requestContext.apiMethod = apiMethod
 
-        requestManager.performRequest(withContext: requestContext, completion: completion)
+        return requestManager.performRequest(withContext: requestContext, completion: completion)
     }
 
-    func getDetailsOfNewsItem(withId id: String, completion: @escaping (APIRequestResult<NewsItemDetailsResponse>) -> ()) {
+    func getDetailsOfNewsItem(withId id: String, completion: @escaping (APIRequestResult<NewsItemDetailsResponse>) -> ()) -> APITask {
         let apiMethod = "news_content"
 
         let queryParameters: [URLQueryItem] = [URLQueryItem(name: "id", value: id)]
@@ -35,6 +35,6 @@ extension APIService {
         requestContext.apiMethod = apiMethod
         requestContext.queryItems = queryParameters
 
-        requestManager.performRequest(withContext: requestContext, completion: completion)
+        return requestManager.performRequest(withContext: requestContext, completion: completion)
     }
 }

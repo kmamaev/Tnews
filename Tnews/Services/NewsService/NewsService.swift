@@ -5,6 +5,13 @@ enum Result<Value> {
     case failure(Error)
 }
 
+protocol CancelableTask {
+    func cancel()
+}
+
+extension APITask: CancelableTask {
+}
+
 protocol NewsServiceObserver: class {
     func newsServiceDidUpdateNews(_ newsService: NewsService)
     func newsService(_ newsService: NewsService, didFailUpdatingNewsWithError error: Error)
@@ -34,7 +41,7 @@ class NewsService {
 
 extension NewsService {
     func fetchAndSaveNews(fetchFromCache: Bool) {
-        apiService.fetchNews { [unowned self] result in
+        _ = apiService.fetchNews { [unowned self] result in
                 switch result {
                     case .success(let newsListResponse):
                         self.storageService.saveNews(newsListResponse.newsItems)
@@ -48,8 +55,8 @@ extension NewsService {
         }
     }
 
-    func getDetailsOfNewsItem(_ newsItem: NewsItem, completion: @escaping (Result<NewsItemDetails>) -> ()) {
-        apiService.getDetailsOfNewsItem(withId: newsItem.id) { result in
+    func getDetailsOfNewsItem(_ newsItem: NewsItem, completion: @escaping (Result<NewsItemDetails>) -> ()) -> CancelableTask {
+        return apiService.getDetailsOfNewsItem(withId: newsItem.id) { result in
                 switch result {
                     case .success(let newsItemDetailsResponse):
                         completion(.success(newsItemDetailsResponse.newsItemDetails))
