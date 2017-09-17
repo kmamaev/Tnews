@@ -1,9 +1,17 @@
 import Foundation
 
-struct NewsItem {
+struct NewsItem: Hashable {
     let id: String
     let text: String
     let publicationDate: Date
+    
+    var hashValue: Int {
+        return id.hashValue
+    }
+}
+
+func == (lhs: NewsItem, rhs: NewsItem) -> Bool {
+    return lhs.id == rhs.id
 }
 
 extension NewsItem: Mappable {

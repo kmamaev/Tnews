@@ -55,15 +55,21 @@ extension NewsService {
         }
     }
 
-    func getDetailsOfNewsItem(_ newsItem: NewsItem, completion: @escaping (Result<NewsItemDetails>) -> ()) -> CancelableTask {
-        return apiService.getDetailsOfNewsItem(withId: newsItem.id) { result in
-                switch result {
-                    case .success(let newsItemDetailsResponse):
-                        completion(.success(newsItemDetailsResponse.newsItemDetails))
-                    case .failure(let error):
-                        completion(.failure(error))
+    func getDetailsOfNewsItem(_ newsItem: NewsItem, completion: @escaping (Result<NewsItemDetails>) -> ()) -> CancelableTask? {
+        if let cachedNewsItemDetails = storageService.getDetailsOfNewsItem(newsItem) {
+            completion(.success(cachedNewsItemDetails))
+            return nil
+        } else {
+            return apiService.getDetailsOfNewsItem(withId: newsItem.id) { [weak self] result in
+                    switch result {
+                        case .success(let newsItemDetailsResponse):
+                            completion(.success(newsItemDetailsResponse.newsItemDetails))
+                            self?.storageService.saveDetails(newsItemDetailsResponse.newsItemDetails, forNewsItem: newsItem)
+                        case .failure(let error):
+                            completion(.failure(error))
+                    }
                 }
-            }
+        }
     }
 }
 

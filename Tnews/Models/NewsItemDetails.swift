@@ -13,3 +13,9 @@ extension NewsItemDetails: Mappable {
         self.content = content
     }
 }
+
+extension NewsItemDetails {
+    init(coreDataObject: CDNewsItemDetails) {
+        self.content = coreDataObject.content
+    }
+}

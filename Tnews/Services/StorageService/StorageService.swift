@@ -15,8 +15,13 @@ protocol StorageServiceObserver: class {
 class StorageService: NSObject {
     fileprivate var observers: [StorageServiceObserver] = []
     
-    fileprivate(set) var newsItems: [NewsItem] = []
-
+    fileprivate(set) var newsItems: [NewsItem] = [] {
+        didSet {
+            newsItemsSet = NSSet(array: newsItems)
+        }
+    }
+    fileprivate var newsItemsSet: NSSet = NSSet()
+    
     fileprivate lazy var persistentContainer: NSPersistentContainer = {
             let container = NSPersistentContainer(name: "Tnews")
             container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -37,7 +42,7 @@ class StorageService: NSObject {
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: "publicationDate", ascending: false)]
 
             let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: "Master")
+                managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
             fetchedResultsController.delegate = self
             return fetchedResultsController
         }()
@@ -61,12 +66,58 @@ extension StorageService {
     func saveNews(_ news: [NewsItem]) {
         let context = fetchedResultsController.managedObjectContext
 
-        removeAllNews(context: context)
+        let newsToSave = NSMutableSet(array: news)
+        newsToSave.minus(newsItemsSet as! Set<NewsItem>)
+        
+        let newsToDelete: NSMutableSet = newsItemsSet.mutableCopy() as! NSMutableSet
+        newsToDelete.minus(NSSet(array: news) as! Set<NewsItem>)
+        
+        let newsToSaveAsArray = Array(newsToSave) as! [NewsItem]
+        let newsToDeleteAsArray = Array(newsToDelete) as! [NewsItem]
 
-        news.forEach { StorageService.createCDNewsItem(withNewsItem: $0, context: context) }
+        if newsToSaveAsArray.isEmpty, newsToDeleteAsArray.isEmpty {
+            notifyStorageServiceDidUpdateNews()
+        } else {
+            newsToSaveAsArray.forEach { StorageService.createCDNewsItem(withNewsItem: $0, context: context) }
+            deleteNewsItems(newsToDeleteAsArray, context: context)
+            do {
+                try context.save()
+            } catch {
+                notifyStorageServiceDidFailUpdatingNews(withError: StorageServiceError.saveDataFailure)
+            }
+        }
+    }
+    
+    func getDetailsOfNewsItem(_ newsItem: NewsItem) -> NewsItemDetails? {
+        let fetchRequest: NSFetchRequest<CDNewsItem> = CDNewsItem.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", newsItem.id)
+
+        var newsItemDetails: NewsItemDetails? = nil
+        do {
+            let fetchedNewsItems = try managedObjectContext.fetch(fetchRequest)
+            if let cdNewsItem = fetchedNewsItems.first,
+                let cdNewsItemDetails = cdNewsItem.details {
+                newsItemDetails = NewsItemDetails(coreDataObject: cdNewsItemDetails)
+            }
+        } catch {
+            notifyStorageServiceDidFailUpdatingNews(withError: StorageServiceError.fetchDataFailure)
+        }
+        
+        return newsItemDetails
+    }
+    
+    func saveDetails(_ newsItemDetails: NewsItemDetails, forNewsItem newsItem: NewsItem) {
+        let fetchRequest: NSFetchRequest<CDNewsItem> = CDNewsItem.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", newsItem.id)
 
         do {
-            try context.save()
+            let fetchedNewsItems = try managedObjectContext.fetch(fetchRequest)
+            if let cdNewsItem = fetchedNewsItems.first {
+                let cdNewsItemDetails = StorageService.cdNewsItemDetails(withDetails: newsItemDetails,
+                    context: managedObjectContext)
+                cdNewsItem.details = cdNewsItemDetails
+                try managedObjectContext.save()
+            }
         } catch {
             notifyStorageServiceDidFailUpdatingNews(withError: StorageServiceError.saveDataFailure)
         }
@@ -74,8 +125,11 @@ extension StorageService {
 }
 
 private extension StorageService {
-    func removeAllNews(context: NSManagedObjectContext) {
+    func deleteNewsItems(_ newsItems: [NewsItem], context: NSManagedObjectContext) {
+        let idsToDelete = newsItems.map { $0.id }
         let fetchRequest: NSFetchRequest<CDNewsItem> = CDNewsItem.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id IN %@", idsToDelete)
+        
         do {
             let newsItems = try context.fetch(fetchRequest)
             for newsItem in newsItems {
@@ -91,6 +145,14 @@ private extension StorageService {
         cdNewsItem.id = newsItem.id
         cdNewsItem.text = newsItem.text
         cdNewsItem.publicationDate = newsItem.publicationDate as NSDate
+    }
+    
+    static func cdNewsItemDetails(withDetails newsItemDetails: NewsItemDetails, context: NSManagedObjectContext)
+        -> CDNewsItemDetails
+    {
+        let cdNewsItemDetails = CDNewsItemDetails(context: context)
+        cdNewsItemDetails.content = newsItemDetails.content
+        return cdNewsItemDetails
     }
 }
 
