@@ -41,7 +41,6 @@ private extension NewsItemDetailsVC {
 
         titleLabel.text = viewModel.title.htmlConvertedString()
         dateLabel.text = viewModel.formattedDateString
-        updateContent()
 
         viewModel.loadDetails()
     }
@@ -63,6 +62,10 @@ extension NewsItemDetailsVC: NewsItemDetailsVMDelegate {
 
 extension NewsItemDetailsVC: UIWebViewDelegate {
     func webViewDidFinishLoad(_ webView: UIWebView) {
-        webViewHeight.constant = webView.scrollView.contentSize.height
+        guard let heightString = webView.stringByEvaluatingJavaScript(from: "document.body.scrollHeight"),
+            let height = Float(heightString) else {
+            return
+            }
+        webViewHeight.constant = CGFloat(height)
     }
 }
